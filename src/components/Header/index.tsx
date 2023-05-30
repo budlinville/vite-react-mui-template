@@ -40,14 +40,14 @@ export const Header = ({
         <>
             <CssBaseline />
 
-            <HideOnScroll enableHideOnScroll={enableHideOnScroll}>
+            <HideOnScroll enable={ enableHideOnScroll }>
                 <AppBar>
                     <Toolbar>
-                        <IconButton aria-label="menu"
-                            edge="start"
-                            color="inherit"
-                            sx={{ mr: 2 }}
-                            onClick={ onMenuClick }
+                        <IconButton aria-label='menu'
+                            edge    ='start'
+                            color   ='inherit'
+                            sx      ={{ mr: 2 }}
+                            onClick ={ onMenuClick }
                         >
                             <MenuIcon />
                         </IconButton>
@@ -65,11 +65,13 @@ export const Header = ({
                 </Box>
             </Container>
 
-            <ScrollTop headerRef={headerAnchorRef} enableScrollTop={enableScrollTop}>
-                <Fab size="small" aria-label="scroll back to top">
-                    <KeyboardArrowUpIcon />
-                </Fab>
-            </ScrollTop>
+            { enableScrollTop && (
+                <ScrollTop headerRef={headerAnchorRef}>
+                    <Fab size="small" aria-label="scroll back to top">
+                        <KeyboardArrowUpIcon />
+                    </Fab>
+                </ScrollTop>
+            )}
 
         </>
     );

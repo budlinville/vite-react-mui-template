@@ -3,16 +3,16 @@ import { Slide, useScrollTrigger } from '@mui/material';
 
 
 interface HideOnScrollProps {
-    enableHideOnScroll: boolean;
+    enable: boolean;
     children: ReactElement;
 }
 
 
 const HideOnScroll = ({
-    enableHideOnScroll,
+    enable,
     children
 }: HideOnScrollProps) => {
-    if (!enableHideOnScroll)
+    if (!enable)
         return children;
 
     const trigger = useScrollTrigger();

@@ -6,20 +6,15 @@ const SCROLL_TOP_OFFSET = 16;
 
 
 interface ScrollTopProps {
-    enableScrollTop?: boolean;
     children: ReactElement;
     headerRef: RefObject<HTMLDivElement>;
 }
 
 
 function ScrollTop({
-    enableScrollTop,
     children,
     headerRef
 }: ScrollTopProps) {
-    if (!enableScrollTop)
-        return children;
-
     const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 100 });
 
     const handleClick = () => headerRef?.current?.scrollIntoView({ block: 'center', behavior: 'smooth' });

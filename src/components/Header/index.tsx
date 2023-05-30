@@ -7,15 +7,17 @@ import {
     Box,
     Container,
     Slide,
-    useScrollTrigger
+    useScrollTrigger,
+    IconButton
 } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 //----------------------------------------------------------------------------------------------------------------------
 
 const APP_NAME = 'My App';
 const APP_NAME_VARIANT = 'h6';
-const MARGIN_VERTICAL = 2;
+const PAGE_MARGIN_VERTICAL = 2;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -54,6 +56,8 @@ export const Header = ({
     children,
     window
 }: Props) => {
+    const onMenuClick = () => console.log('TODO: Implement me!');
+
     return (
         <>
             <CssBaseline />
@@ -61,6 +65,14 @@ export const Header = ({
             <HideOnScroll window={window} hideOnScroll={hideOnScroll}>
                 <AppBar>
                     <Toolbar>
+                        <IconButton aria-label="menu"
+                            edge="start"
+                            color="inherit"
+                            sx={{ mr: 2 }}
+                            onClick={ onMenuClick }
+                        >
+                            <MenuIcon />
+                        </IconButton>
                         <Typography variant={APP_NAME_VARIANT}> { APP_NAME } </Typography>
                     </Toolbar>
                 </AppBar>
@@ -70,7 +82,7 @@ export const Header = ({
             <Toolbar />
 
             <Container>
-                <Box sx={{ my: MARGIN_VERTICAL }}>
+                <Box sx={{ my: PAGE_MARGIN_VERTICAL }}>
                     { children }
                 </Box>
             </Container>

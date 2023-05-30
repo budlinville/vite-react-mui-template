@@ -1,9 +1,9 @@
 interface HomeProps {
-    
+
 }
- 
+
 const Home = ({ }: HomeProps) => {
-    return ( 
+    return (
         <div>
             <h1>Home</h1>
             { [...new Array(100)].map( () => `
@@ -15,5 +15,5 @@ const Home = ({ }: HomeProps) => {
         </div>
     );
 }
- 
+
 export default Home;

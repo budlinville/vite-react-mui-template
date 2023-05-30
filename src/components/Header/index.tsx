@@ -22,21 +22,24 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 const APP_NAME = 'My App';
 const APP_NAME_VARIANT = 'h6';
 const PAGE_MARGIN_VERTICAL = 2;
+const SCROLL_TOP_OFFSET = 16;
 
 //----------------------------------------------------------------------------------------------------------------------
 
 
 interface HideOnScrollProps {
     enableHideOnScroll: boolean;
-    window?: () => Window;
     children: ReactElement;
 }
 
-const HideOnScroll = ({ enableHideOnScroll, children, window }: HideOnScrollProps) => {
+const HideOnScroll = ({
+    enableHideOnScroll,
+    children
+}: HideOnScrollProps) => {
     if (!enableHideOnScroll)
         return children;
 
-    const trigger = useScrollTrigger({ target: window ? window() : undefined });
+    const trigger = useScrollTrigger();
 
     return (
         <Slide appear={false} direction="down" in={!trigger}>
@@ -48,12 +51,7 @@ const HideOnScroll = ({ enableHideOnScroll, children, window }: HideOnScrollProp
 
 //----------------------------------------------------------------------------------------------------------------------
 interface ScrollTopProps {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
     enableScrollTop?: boolean;
-    window?: () => Window;
     children: ReactElement;
     headerRef: RefObject<HTMLDivElement>;
   }
@@ -61,30 +59,21 @@ interface ScrollTopProps {
 function ScrollTop({
     enableScrollTop,
     children,
-    window,
     headerRef
 }: ScrollTopProps) {
     if (!enableScrollTop)
         return children;
 
-    const anchor = headerRef?.current;
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
-    const trigger = useScrollTrigger({
-        target: window ? window() : undefined,
-        disableHysteresis: true,
-        threshold: 100,
-    });
+    const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 100 });
 
-    const handleClick = () => anchor?.scrollIntoView({ block: 'center' });
+    const handleClick = () => headerRef?.current?.scrollIntoView({ block: 'center', behavior: 'smooth' });
 
     return (
         <Fade in={ trigger }>
             <Box
                 onClick={ handleClick }
                 role='presentation'
-                sx={{ position: 'fixed', bottom: 16, right: 16 }}
+                sx={{ position: 'fixed', bottom: SCROLL_TOP_OFFSET, right: SCROLL_TOP_OFFSET }}
             >
                 { children }
             </Box>
@@ -99,7 +88,6 @@ function ScrollTop({
 interface Props {
     enableHideOnScroll?: boolean;
     enableScrollTop?: boolean;
-    window?: () => Window;
     children: ReactElement;
 }
 
@@ -107,7 +95,6 @@ export const Header = ({
     enableHideOnScroll=true,
     enableScrollTop=true,
     children,
-    window
 }: Props) => {
     const headerAnchorRef = useRef<HTMLDivElement>(null);
     const onMenuClick = () => console.log('TODO: Implement me!');
@@ -116,7 +103,7 @@ export const Header = ({
         <>
             <CssBaseline />
 
-            <HideOnScroll window={window} enableHideOnScroll={enableHideOnScroll}>
+            <HideOnScroll enableHideOnScroll={enableHideOnScroll}>
                 <AppBar>
                     <Toolbar>
                         <IconButton aria-label="menu"
@@ -141,7 +128,7 @@ export const Header = ({
                 </Box>
             </Container>
 
-            <ScrollTop window={window} headerRef={headerAnchorRef} enableScrollTop={enableScrollTop}>
+            <ScrollTop headerRef={headerAnchorRef} enableScrollTop={enableScrollTop}>
                 <Fab size="small" aria-label="scroll back to top">
                     <KeyboardArrowUpIcon />
                 </Fab>

@@ -1,8 +1,6 @@
 # Vite React Template
 
-Good starting point for Vite React Apps using React Router with a Header
-
-MUI is installed, but unused. Should probably remove in the future
+Good starting point for Vite React Apps using React Router and MUI
 
 ## Using this as a starting point
 

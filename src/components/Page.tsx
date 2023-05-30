@@ -1,17 +1,18 @@
-import React from "react";
-import { HeaderShadow } from "./Header";
+import { ReactElement } from "react";
+import Header from "./Header";
 
 interface PageProps {
-    children: React.ReactNode;
+    children: ReactElement;
 };
 
 const Page = ({ children }: PageProps) => {
     return (
         <div>
-            <HeaderShadow />
-            { children }
+            <Header>
+                { children }
+            </Header>
         </div>
     );
 }
 
-export const withPage = (component: React.ReactNode) => (<Page>{ component }</Page>);
+export const withPage = (component: ReactElement) => (<Page>{ component }</Page>);

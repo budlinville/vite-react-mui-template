@@ -8,6 +8,6 @@ MUI is installed, but unused. Should probably remove in the future
 
 After cloning this repository, Run the following commands to track this as its own project:
 
-	sudo rm -r .git .gitignore
+	sudo rm -r .git
 	git init
 
